@@ -1,0 +1,7 @@
+parameters:
+
+
+database:
+	dsn: 'mysql:host=sw-client-sql-1.mysql.database.azure.com;dbname=dev'
+	user: jkohoutek225
+	password: atavism51iNfidel25bondiNg
