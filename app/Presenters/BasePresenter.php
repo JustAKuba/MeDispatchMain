@@ -20,5 +20,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         }
 
         $this->template->user = $this->getUser()->getIdentity();
+        $this->template->userRole = $this->getUser()->getRoles()['permission'];
+        $this->template->pageLink = $this->link('//this');
     }
 }

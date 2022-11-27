@@ -1,6 +1,16 @@
 services:
 	- App\Router\RouterFactory::createRouter
 	- App\Model\UserAuthenticator
+	- App\Model\Repository\Table\UserRepository
+	- App\Model\Repository\Table\help_articleRepository
+	- App\Model\DataSource\Form\help_articleFormDataSource
+	- App\Model\DataManager\help_articleDataManager
+	- App\Model\Repository\Table\help_chapterRepository
+	- App\Model\DataSource\Form\help_chapterFormDataSource
+	- App\Model\DataManager\help_chapterDataManager
+	- App\Types\Form\TFormHelp_article
+	- App\Types\Form\TFormHelp_chapter
+
 
 
 

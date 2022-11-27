@@ -9,8 +9,7 @@ final class DashboardPresenter extends BasePresenter
     public function renderDefault(): void
     {
         $this->setup();
+
     }
-
-
 
 }

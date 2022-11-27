@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Models\DataManager;
+namespace App\Model\DataManager;
 
 use App\Model\Repository\Table\UserRepository;
 use Nette\Security\User;

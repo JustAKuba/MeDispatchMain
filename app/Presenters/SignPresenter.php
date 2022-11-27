@@ -19,6 +19,10 @@ final class SignPresenter extends Nette\Application\UI\Presenter
 
     protected function createComponentSignInForm(): Form
     {
+        if($this->getUser()->isLoggedIn()){
+            $this->redirect('Dashboard:default');
+        }
+
         $form = new Form;
         $form->addText('email', 'Email:')
             ->setRequired('Prosím zadejte email.');
@@ -39,7 +43,7 @@ final class SignPresenter extends Nette\Application\UI\Presenter
                 ->login($data->email, $data->password);
             $this->redirect('Dashboard:default');
         } catch (Nette\Security\AuthenticationException $e) {
-            $form->addError('Nesprávné přihlašovací údaje. ' . $e->getMessage());
+            $this->flashMessage($e->getMessage(), 'danger');
         }
     }
 
