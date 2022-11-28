@@ -95,7 +95,7 @@
                 </li>
             {/foreach}
             <li class="border-top my-3"></li>
-            {if $user->userRole = 'Admin'}
+            {if $user->userRole == 'Admin'}
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#admin-collapse" aria-expanded="false">
                         Admin
