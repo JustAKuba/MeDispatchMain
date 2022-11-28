@@ -78,16 +78,34 @@
 
             {foreach $help_chapter as $chapter}
                 <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#{$chapter->tech_name}-collapse" aria-expanded="true">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#{$chapter->tech_name}-collapse" aria-expanded="false">
                         {$chapter->name}
                     </button>
-                    <div class="collapse show" id="{$chapter->tech_name}-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    {if $userRole == 'Admin'}
+                        <a n:href="Help:DeleteChapter $chapter->id">
+                            <i class="bi-file-x" style="color: black; margin:1px"></i>
+                        </a>
+                        <a n:href="Help:EditChapter $chapter->id">
+                            <i class="bi-pencil" style="color: black; margin:1px"></i>
+                        </a>
+                    {/if}
+                    <div class="collapse" id="{$chapter->tech_name}-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small " >
                             {foreach $help_article as $article}
-                                {if $article->chapter == $chapter->id}
-                                    <li><a class="link-dark d-inline-flex text-decoration-none rounded" n:href="Help:Article $article->id">
+                                {if $article->chapter == $chapter->id && !$article->is_deleted}
+                                    <li style="align-items: flex-start; display: flex; justify-content: flex-start">
+                                        <a class="link-dark d-inline-flex text-decoration-none rounded" n:href="Help:Article $article->id" style="margin:1px">
                                             {$article->name}
-                                        </a></li>
+                                        </a>
+                                        {if $userRole == 'Admin'}
+                                            <a n:href="Help:DeleteArticle $article->id">
+                                                <i class="bi-file-x" style="color: black; margin:1px"></i>
+                                            </a>
+                                            <a n:href="Help:EditArticle $article->id">
+                                                <i class="bi-pencil" style="color: black; margin:1px"></i>
+                                            </a>
+                                        {/if}
+                                    </li>
                                 {/if}
                             {/foreach}
                         </ul>
@@ -95,7 +113,7 @@
                 </li>
             {/foreach}
             <li class="border-top my-3"></li>
-            {if $user->userRole == 'Admin'}
+            {if $userRole == 'Admin'}
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#admin-collapse" aria-expanded="false">
                         Admin

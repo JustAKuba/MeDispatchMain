@@ -2,5 +2,10 @@
 {block content}
     <h1>{$open_article->name}</h1>
     <br>
-    {$open_article->content}
+    <div id="articleText"></div>
+
+    <script>
+        document.querySelector('#articleText').innerHTML ={$open_article->content}
+    </script>
+
 {/block}

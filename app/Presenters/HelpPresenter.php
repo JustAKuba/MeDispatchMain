@@ -56,9 +56,7 @@ class HelpPresenter extends BasePresenter
 
     public function renderDefault(): void
     {
-        $this->setup();
-        $this->template->help_article = $this->help_articleRepository->findAll();
-        $this->template->help_chapter = $this->help_chapterRepository->findAll();
+        $this->redirect('Help:Article', 1);
     }
 
     public  function renderCreateArticle($id) {
@@ -68,10 +66,38 @@ class HelpPresenter extends BasePresenter
 
     }
 
+    public function renderEditArticle($id) {
+        $this->setup('Admin');
+        $this->template->help_article = $this->help_articleRepository->findAll();
+        $this->template->help_chapter = $this->help_chapterRepository->findAll();
+
+        $this['formHelp_article']->setDefaults($this->help_articleFormDataSource->getDefaultsEditArticle($id));
+    }
+
+    public function actionDeleteArticle($id) {
+        $this->help_articleRepository->softDelete($id);
+        $this->flashMessage('Article was successfully deleted', 'success');
+        $this->redirect('Help:Default');
+    }
+
     public function renderCreateChapter($id) {
         $this->setup('Admin');
         $this->template->help_article = $this->help_articleRepository->findAll();
         $this->template->help_chapter = $this->help_chapterRepository->findAll();
+    }
+
+    public function renderEditChapter($id) {
+        $this->setup('Admin');
+        $this->template->help_article = $this->help_articleRepository->findAll();
+        $this->template->help_chapter = $this->help_chapterRepository->findAll();
+
+        $this['formHelp_chapter']->setDefaults($this->help_chapterFormDataSource->getDefaultsEditChapter($id));
+    }
+
+    public function actionDeleteChapter($id) {
+        $this->help_chapterRepository->softDelete($id);
+        $this->flashMessage('Chapter was successfully deleted', 'success');
+        $this->redirect('Help:Default');
     }
 
     public function renderArticle($id)
@@ -95,6 +121,7 @@ class HelpPresenter extends BasePresenter
     public function createComponentFormHelp_article()
     {
         $form = new Form;
+        $form->addHidden('id');
         $form->addText('name', 'Název článku')
             ->setRequired('Prosím zadejte název článku.');
         $form->addSelect('chapter', 'Kategorie', $this->help_chapterRepository->findAll()->fetchPairs('id', 'name'))
@@ -120,6 +147,7 @@ class HelpPresenter extends BasePresenter
     public function createComponentFormHelp_chapter()
     {
         $form = new Form;
+        $form->addHidden('id');
         $form->addText('name', 'Název kategorie')
             ->setRequired('Prosím zadejte název kategorie.');
         $form->addSubmit('send', 'Uložit')

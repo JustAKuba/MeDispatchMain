@@ -18,6 +18,21 @@ class help_chapterFormDataSource
         $this->help_chapterRepository = $help_chapterRepository;
     }
 
+    public function getDefaultsEditChapter($chapterId): TFormHelp_chapter
+    {
+        $chapter = $this->help_chapterRepository->fetchById($chapterId);
+        $values = new TFormHelp_chapter();
+
+        if($chapter){
+            $values->id = $chapter->id;
+            $values->name = $chapter->name;
+            $values->created_at = $chapter->created_at;
+            $values->deleted_by = $chapter->deleted_by;
+            $values->date_deleted = $chapter->date_deleted;
+        }
+        return $values;
+    }
+
     public function save(TFormHelp_chapter $values): int {
         $help_chapter = new TDBHelp_chapter();
         $help_chapter->id = $values->id;
@@ -26,6 +41,7 @@ class help_chapterFormDataSource
         $help_chapter->created_at = $values->created_at;
         $help_chapter->date_deleted = $values->date_deleted;
         $help_chapter->deleted_by = $values->deleted_by;
+        $help_chapter->is_deleted = $values->is_deleted;
         return $this->help_chapterRepository->save($help_chapter);
     }
 

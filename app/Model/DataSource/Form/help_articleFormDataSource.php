@@ -47,6 +47,7 @@ class help_articleFormDataSource
         $help_article->author = $values->author;
         $help_article->chapter = $values->chapter;
         $help_article->deleted_by = $values->deleted_by;
+        $help_article->is_deleted = $values->is_deleted;
         return $this->help_articleRepository->save($help_article);
     }
 

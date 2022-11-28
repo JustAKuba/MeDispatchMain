@@ -17,12 +17,15 @@ final class SignPresenter extends Nette\Application\UI\Presenter
         $this->authenticator = $authenticator;
     }
 
-    protected function createComponentSignInForm(): Form
-    {
-        if($this->getUser()->isLoggedIn()){
+    public function renderDefault() {
+        if($this->getUser()->isLoggedIn()) {
             $this->redirect('Dashboard:default');
         }
+}
 
+
+    protected function createComponentSignInForm(): Form
+    {
         $form = new Form;
         $form->addText('email', 'Email:')
             ->setRequired('Prosím zadejte email.');

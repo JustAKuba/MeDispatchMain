@@ -14,4 +14,5 @@ class TFormHelp_article
     public $deleted_by;
     public $author;
     public $chapter;
+    public $is_deleted;
 }

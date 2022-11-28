@@ -13,4 +13,5 @@ class TFormUser {
     public $is_active;
     public $date_deleted;
     public $deleted_by;
+    public $is_deleted;
 }

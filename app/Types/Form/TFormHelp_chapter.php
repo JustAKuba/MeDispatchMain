@@ -11,4 +11,5 @@ class TFormHelp_chapter
     public $created_at;
     public $date_deleted;
     public $deleted_by;
+    public $is_deleted;
 }
