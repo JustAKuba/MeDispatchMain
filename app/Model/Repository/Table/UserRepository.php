@@ -9,3 +9,8 @@ class UserRepository extends BaseModel {
 
     protected $table = "user";
 }
+
+
+
+
+

@@ -58,6 +58,11 @@ class BaseModel{
 		}
 	}
 
+    public function saveWithId($values): int {
+        $this->db->query("INSERT INTO `$this->table`", $values);
+        return intval($this->db->getInsertId());
+    }
+
     public function isSetId($values) {
 		return array_key_exists('id', $values) && intval($values['id']) > 0;
 	}

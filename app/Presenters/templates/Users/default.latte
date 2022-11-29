@@ -1,0 +1,83 @@
+{layout "../layout.latte"}
+{block content}
+    <style>
+        #users {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #users td, #users th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #users tr:nth-child(even){ background-color: #f2f2f2; }
+
+        #users tr:hover { background-color: #ddd; }
+
+        #users th {
+            text-align: left;
+            background-color: #ab0000;
+            color: white;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-right: 0;
+        }
+
+
+        .functionSelector {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        .functionButton {
+            height: 40px;
+            width: 40px;
+            margin: 0;
+            padding: 0;
+            border: none;
+            background-color: #d22323;
+            color: white;
+        }
+
+        .functionButton:hover {
+            background-color: #ff2a2a;
+        }
+    </style>
+
+    <h1>Správa uživatelů</h1>
+    <table id="users">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Jméno
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Práva
+            </th>
+            <th class="functionSelector" >
+                <a href={link Users:create}>
+              <button class="functionButton"><i class="bi-person-add"></i></button>
+                </a>
+            </th>
+        </tr>
+        {foreach $users as $oneUser}
+            <tr>
+                <td>{$oneUser->id}</td>
+                <td>{$oneUser->name}</td>
+                <td>{$oneUser->email}</td>
+                <td>null</td>
+                <td class="functionSelector">
+                    <a n:href="Users:delete">Smazat</a>
+                    <a n:href="Users:edit $oneUser->id">Upravit</a>
+                </td>
+            </tr>
+        {/foreach}
+    </table>
+{/block}

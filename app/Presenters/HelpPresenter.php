@@ -115,7 +115,6 @@ class HelpPresenter extends BasePresenter
 
 
 
-
     //Components
 
     public function createComponentFormHelp_article()

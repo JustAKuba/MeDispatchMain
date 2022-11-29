@@ -10,6 +10,9 @@ services:
 	- App\Model\DataManager\help_chapterDataManager
 	- App\Types\Form\TFormHelp_article
 	- App\Types\Form\TFormHelp_chapter
+	- App\Model\DataManager\UserDataManager
+	- App\Model\DataSource\Form\UserFormDataSource
+
 
 
 

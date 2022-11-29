@@ -38,25 +38,39 @@
         .center-vertical {
             margin-top: -0.5vh;
         }
+
+        .flash{
+            width: 100%;
+            color: white;
+        }
+
+        .success {
+            background-color: green;
+        }
+
+        .warning {
+            background-color: orange;
+        }
+
+        .danger {
+            background-color: red;
+        }
+
     </style>
     {block customStyles}{/block}
 </head>
 
 <body>
-    {foreach $flashes as $flash}
-        <div class="flash {$flash->type}">{$flash->message}</div>
-    {/foreach}
-
     <nav class="navbar navbar-expand-md bg-light navbar-light border-bottom">
         <div class="container-fluid">
-            <a class="navbar-brand center-vertical" n:href="dashboard:default"><img src="/images/MD_logo_blk.png" alt="" height="30vh"> </a>
+            <a class="navbar-brand center-vertical" n:href="Dashboard:default"><img src="/images/MD_logo_blk.png" alt="" height="30vh"> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" id="dashboard" n:href="dashboard:default">Přehled</a>
+                        <a class="nav-link" id="dashboard" n:href="Dashboard:default">Přehled</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="articles" href="#">Požadavky</a>
@@ -75,7 +89,7 @@
                             </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="#">Identita firmy</a></li>
-                                    <li><a class="dropdown-item" href="#">Uživatelé</a></li>
+                                    <li><a class="dropdown-item" n:href="Users:Default">Uživatelé</a></li>
                                 </ul>
                         </li>
                     {/if}
@@ -94,6 +108,9 @@
             </div>
         </div>
     </nav>
+    {foreach $flashes as $flash}
+        <div class="flash {$flash->type}">{$flash->message}</div>
+    {/foreach}
 
     <div class="container content">
         {block content}

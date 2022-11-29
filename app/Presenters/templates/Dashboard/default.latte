@@ -9,5 +9,38 @@
 {/block}
 
 {block content}
-<h1>Přehled</h1>
+{if $userRole == 'Admin'}
+    <h2>
+        Informace o aplikaci:
+    </h2>
+    <ul>
+        <li>
+            Verze: DEMO 0.1
+        </li>
+        <li>
+            Jméno společnosti: DEMO
+        </li>
+    </ul>
+    <h2>
+        Zkratky administrátora:
+    </h2>
+    <ul>
+        <li>
+            Todo
+        </li>
+        <li>
+            Todo
+        </li>
+        <li>
+            Todo
+        </li>
+        <li>
+            Todo
+        </li>
+    </ul>
+{/if}
+{if $userRole == 'Dispatch'}
+{/if}
+{if $userRole == 'Rescue'}
+{/if}
 {/block}
