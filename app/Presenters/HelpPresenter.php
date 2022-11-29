@@ -123,7 +123,7 @@ class HelpPresenter extends BasePresenter
         $form->addHidden('id');
         $form->addText('name', 'Název článku')
             ->setRequired('Prosím zadejte název článku.');
-        $form->addSelect('chapter', 'Kategorie', $this->help_chapterRepository->findAll()->fetchPairs('id', 'name'))
+        $form->addSelect('chapter', 'Kategorie', $this->help_chapterRepository->findAllActive()->fetchPairs('id', 'name'))
             ->setRequired('Prosím vyberte kategorii.');
         $form->addTextArea('content', 'Obsah')
             ->setHtmlAttribute('rows', 20)

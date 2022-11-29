@@ -82,6 +82,7 @@
         <ul class="list-unstyled ps-0">
 
             {foreach $help_chapter as $chapter}
+                {if $chapter->is_deleted==0}
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#{$chapter->tech_name}-collapse" aria-expanded="false">
                         {$chapter->name}
@@ -116,6 +117,7 @@
                         </ul>
                     </div>
                 </li>
+                {/if}
             {/foreach}
             <li class="border-top my-3"></li>
             {if $userRole == 'Admin'}

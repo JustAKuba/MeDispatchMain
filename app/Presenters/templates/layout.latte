@@ -75,6 +75,15 @@
                     <li class="nav-item">
                         <a class="nav-link" id="articles" href="#">Požadavky</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Prostředky
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" n:href="Station:default">Základny</a></li>
+                            <li><a class="dropdown-item" n:href="Vehicle:default">Vozidla</a></li>
+                        </ul>
+                    </li>
 
                 </ul>
 
@@ -113,6 +122,7 @@
     {/foreach}
 
     <div class="container content">
+        {block subContent}{/block}
         {block content}
         {/block}
     </div>

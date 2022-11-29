@@ -48,8 +48,7 @@ class UsersPresenter extends BasePresenter
 
     public function createComponentFormUser(): Form {
         $form = new Form;
-        $form->addText('id', 'ID')
-            ->setRequired("Zadejte prosím ID uživatele");
+        $form->addHidden('id');
         $form->addText('name', 'Jméno')
             ->setRequired("Zadejte prosím jméno uživatele");
         $form->addText('email', 'Email')
@@ -71,7 +70,7 @@ class UsersPresenter extends BasePresenter
         $tform->email = $values->email;
         $tform->role = $values->role;
         $tform->password = $values->password;
-        $this->userFormDataSource->create($tform);
+        $this->userFormDataSource->save($tform);
         $this->flashMessage('Uživatel byl uložen','success');
         $this->redirect('Users:default');
     }

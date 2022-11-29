@@ -36,7 +36,7 @@ class BaseModel{
 	}
 
     public function findAllActive(): Selection {
-		return $this->findAll()->where("is_active IS TRUE");
+		return $this->findAll()->where("is_deleted IS FALSE");
 	}
 
     public function save($values): int {
@@ -50,6 +50,7 @@ class BaseModel{
 			$this->db->query("UPDATE `$this->table` SET ? WHERE id = ?", $values, $id);
 			return intval($id);
 		} else {
+
 			if (array_key_exists('id', $values)) {
 				unset($values['id']);
 			}

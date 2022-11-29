@@ -1,0 +1,110 @@
+{layout "../layout.latte"}
+{block content}
+    <style>
+        #stations {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #stations td, #stations th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #stations tr:nth-child(even){ background-color: #f2f2f2; }
+
+        #stations tr:hover { background-color: #ddd; }
+
+        #stations th {
+            text-align: left;
+            background-color: #ab0000;
+            color: white;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-right: 0;
+        }
+
+
+        .functionSelector {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        .functionButton {
+            height: 40px;
+            width: 40px;
+            margin: 0;
+            padding: 0;
+            border: none;
+            background-color: #d22323;
+            color: white;
+        }
+
+        .functionButton:hover {
+            background-color: #ff2a2a;
+        }
+
+    </style>
+
+    <h1>Základny</h1>
+    <div class="container" style="margin-top: 20px">
+        <table id="stations">
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Název
+                </th>
+                <th>
+                    Adresa
+                </th>
+                <th style="width: min-content">
+
+                    Počet vozidel
+                </th>
+                <th>
+                    Vytížení
+                </th>
+                <th class="functionSelector">
+                    <a n:href="Station:create">
+                        <button class="functionButton"><i class="bi-building-add"></i></button>
+                    </a>
+                </th>
+            </tr>
+            {foreach $stations as $station}
+            {if $station->is_deleted == 0}
+                <tr>
+                    <td>
+                        {$station->id}
+                    </td>
+                    <td>
+                        {$station->name}
+                    </td>
+                    <td>
+                        {$station->address}
+                    </td>
+                    <td>
+                        realnyPocet/{$station->size}
+                    </td>
+                    <td>
+                        pocetDostupnych/celkovyPocet
+                        <!--$station->vehicleCount} / $station->maxVehicles}-->
+                    </td>
+                    {if $userRole}
+                    <td class="functionSelector">
+                        <a n:href="Station:delete $station->id">
+                            <button class="functionButton"><i class="bi-trash"></i></button>
+                        </a>
+                        <a n:href="Station:edit $station->id">
+                            <button class="functionButton"><i class="bi-pencil-square"></i></button>
+                        </a>
+                    </td>
+                </tr>
+                {/if}
+            {/if}
+            {/foreach}
+        </table>
+    </div>
+{/block}

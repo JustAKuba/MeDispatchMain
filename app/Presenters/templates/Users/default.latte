@@ -1,22 +1,22 @@
 {layout "../layout.latte"}
 {block content}
     <style>
-        #users {
+        #user {
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
             width: 100%;
         }
 
-        #users td, #users th {
+        #user td, #user th {
             border: 1px solid #ddd;
             padding: 8px;
         }
 
-        #users tr:nth-child(even){ background-color: #f2f2f2; }
+        #user tr:nth-child(even){ background-color: #f2f2f2; }
 
-        #users tr:hover { background-color: #ddd; }
+        #user tr:hover { background-color: #ddd; }
 
-        #users th {
+        #user th {
             text-align: left;
             background-color: #ab0000;
             color: white;
@@ -45,39 +45,44 @@
             background-color: #ff2a2a;
         }
     </style>
+    <div class="container" style="margin-top: 20px">
 
-    <h1>Správa uživatelů</h1>
-    <table id="users">
-        <tr>
-            <th>
-                ID
-            </th>
-            <th>
-                Jméno
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Práva
-            </th>
-            <th class="functionSelector" >
-                <a href={link Users:create}>
-              <button class="functionButton"><i class="bi-person-add"></i></button>
-                </a>
-            </th>
-        </tr>
-        {foreach $users as $oneUser}
+        <h1>Správa uživatelů</h1>
+        <table id="user">
             <tr>
-                <td>{$oneUser->id}</td>
-                <td>{$oneUser->name}</td>
-                <td>{$oneUser->email}</td>
-                <td>null</td>
-                <td class="functionSelector">
-                    <a n:href="Users:delete">Smazat</a>
-                    <a n:href="Users:edit $oneUser->id">Upravit</a>
-                </td>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Jméno
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Práva
+                </th>
+                <th class="functionSelector" >
+                    <a href={link Users:create}>
+                  <button class="functionButton"><i class="bi-person-add"></i></button>
+                    </a>
+                </th>
             </tr>
-        {/foreach}
-    </table>
+            {foreach $users as $oneUser}
+                {if $oneUser->is_deleted == 0}
+                <tr>
+                    <td>{$oneUser->id}</td>
+                    <td>{$oneUser->name}</td>
+                    <td>{$oneUser->email}</td>
+                    <td>{$oneUser->role}</td>
+                    <td class="functionSelector">
+                        <a n:href="Users:delete $oneUser->id"><button class="functionButton"><i class="bi-trash"></i></button></a>
+                        <a n:href="Users:edit $oneUser->id"><button class="functionButton"><i class="bi-pencil-square"></i></button></a>
+                    </td>
+                </tr>
+                {/if}
+            {/foreach}
+        </table>
+
+    </div>
 {/block}
