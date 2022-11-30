@@ -56,6 +56,20 @@
             background-color: red;
         }
 
+        .addButton {
+            height: 35px;
+            width: 35px;
+            margin: 0;
+            padding: 0;
+            border: none;
+            background-color: #ae0909;
+            color: white;
+        }
+
+        .addButton:hover {
+            background-color: #fa0c0c;
+        }
+
     </style>
     {block customStyles}{/block}
 </head>
@@ -69,6 +83,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="addButton"><i class="bi-node-plus-fill" ></i></button>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #ae0909; color: white; font-weight: bold">
+                            <li class="dropdown-item" style="color: white; font-weight: bold"><a><i class="bi-envelope-plus"></i> Požadavek</a></li>
+                            {if $userRole == 'Admin'}
+                                <li class="dropdown-item" ><a class="nav-link" style="color: white; font-weight: bold" n:href="Users:create"><i class="bi-person-plus"></i> Uživatel</a></li>
+                                <li class="dropdown-item" ><a class="nav-link" style="color: white; font-weight: bold" n:href="Station:create"><i class="bi-building-add"></i> Základna</a></li>
+                                <li class="dropdown-item"><a class="nav-link" style="color: white; font-weight: bold" n:href="Vehicle:create"><i class="bi-car-front"></i> Vozidlo</a></li>
+                            {/if}
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" id="dashboard" n:href="Dashboard:default">Přehled</a>
                     </li>

@@ -16,6 +16,10 @@ services:
 	- App\Model\DataManager\StationDataManager
 	- App\Model\DataSource\Form\StationFormDataSource
 	- App\Model\Repository\Table\StationRepository
+	- App\Model\DataManager\VehicleDataManager
+	- App\Model\DataSource\Form\VehicleFormDataSource
+	- App\Model\Repository\Table\VehicleRepository
+	- App\Types\Form\TFormVehicle
 
 
 

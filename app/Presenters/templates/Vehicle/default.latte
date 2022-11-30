@@ -1,5 +1,111 @@
-{layout "../subLayout.latte"}
+{layout "../layout.latte"}
 
 {block content}
+    <style>
+        #vehicles {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
+        #vehicles td, #vehicles th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #vehicles tr:nth-child(even){ background-color: #f2f2f2; }
+
+        #vehicles tr:hover { background-color: #ddd; }
+
+        #vehicles th {
+            text-align: left;
+            background-color: #ab0000;
+            color: white;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-right: 0;
+        }
+
+
+        .functionSelector {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        .functionButton {
+            height: 40px;
+            width: 40px;
+            margin: 0;
+            padding: 0;
+            border: none;
+            background-color: #d22323;
+            color: white;
+        }
+
+        .functionButton:hover {
+            background-color: #ff2a2a;
+        }
+
+    </style>
+
+    <h1><i class="bi-car-front-fill"></i> Vozidla</h1>
+    <div class="container" style="margin-top: 20px">
+        <table id="vehicles">
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Označení
+                </th>
+                <th>
+                    Model
+                </th>
+                <th>
+                    Základna
+                </th>
+                <th>
+                    Dostupné
+                </th>
+                {if $userRole == 'Admin'}
+                <th class="functionSelector">
+                    <a n:href="vehicle:create">
+                        <button class="functionButton"><i class="bi-car-front"></i></button>
+                    </a>
+                </th>
+                {/if}
+            </tr>
+            {foreach $vehicles as $vehicle}
+            {if $vehicle->is_deleted == 0}
+                <tr>
+                    <td>
+                        {$vehicle->id}
+                    </td>
+                    <td>
+                        {$vehicle->callsign}
+                    </td>
+                    <td>
+                        {$vehicle->model}
+                    <td>
+                        {$stations[$vehicle->station]}
+                    </td>
+                    <td>
+                        {$vehicle->on_station}
+                    </td>
+
+                    {if $userRole == 'Admin'}
+                    <td class="functionSelector">
+                        <a n:href="vehicle:delete $vehicle->id">
+                            <button class="functionButton"><i class="bi-trash"></i></button>
+                        </a>
+                        <a n:href="vehicle:edit $vehicle->id">
+                            <button class="functionButton"><i class="bi-pencil-square"></i></button>
+                        </a>
+                    </td>
+                </tr>
+                {/if}
+            {/if}
+            {/foreach}
+        </table>
+    </div>
 {/block}

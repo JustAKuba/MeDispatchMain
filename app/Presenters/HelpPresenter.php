@@ -102,7 +102,7 @@ class HelpPresenter extends BasePresenter
 
     public function renderArticle($id)
     {
-        $this->setup();
+        $this->setupPublic();
         $this->template->help_article = $this->help_articleRepository->findAll();
         $this->template->help_chapter = $this->help_chapterRepository->findAll();
         $this->template->open_article = $this->help_articleRepository->fetchById($id);

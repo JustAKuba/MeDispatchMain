@@ -47,7 +47,7 @@
 
     </style>
 
-    <h1>Základny</h1>
+    <h1><i class="bi-building"></i> Základny</h1>
     <div class="container" style="margin-top: 20px">
         <table id="stations">
             <tr>
@@ -67,11 +67,13 @@
                 <th>
                     Vytížení
                 </th>
+                {if $userRole == 'Admin'}
                 <th class="functionSelector">
                     <a n:href="Station:create">
                         <button class="functionButton"><i class="bi-building-add"></i></button>
                     </a>
                 </th>
+                {/if}
             </tr>
             {foreach $stations as $station}
             {if $station->is_deleted == 0}
@@ -92,7 +94,7 @@
                         pocetDostupnych/celkovyPocet
                         <!--$station->vehicleCount} / $station->maxVehicles}-->
                     </td>
-                    {if $userRole}
+                    {if $userRole == 'Admin'}
                     <td class="functionSelector">
                         <a n:href="Station:delete $station->id">
                             <button class="functionButton"><i class="bi-trash"></i></button>
