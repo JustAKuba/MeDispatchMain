@@ -20,6 +20,12 @@ services:
 	- App\Model\DataSource\Form\VehicleFormDataSource
 	- App\Model\Repository\Table\VehicleRepository
 	- App\Types\Form\TFormVehicle
+	- App\Types\Form\TFormTicket
+	- App\Model\DataManager\TicketDataManager
+	- App\Model\DataSource\Form\TicketFormDataSource
+	- App\Model\Repository\Table\TicketRepository
+
+
 
 
 

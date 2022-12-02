@@ -57,8 +57,8 @@
         }
 
         .addButton {
-            height: 35px;
-            width: 35px;
+            height: 30px;
+            width: 30px;
             margin: 0;
             padding: 0;
             border: none;
@@ -88,7 +88,7 @@
                             <button class="addButton"><i class="bi-node-plus-fill" ></i></button>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #ae0909; color: white; font-weight: bold">
-                            <li class="dropdown-item" style="color: white; font-weight: bold"><a><i class="bi-envelope-plus"></i> Požadavek</a></li>
+                            <li class="dropdown-item" style="color: white; font-weight: bold"><a class="nav-link" n:href="Ticket:create"><i class="bi-envelope-plus"></i> Požadavek</a></li>
                             {if $userRole == 'Admin'}
                                 <li class="dropdown-item" ><a class="nav-link" style="color: white; font-weight: bold" n:href="Users:create"><i class="bi-person-plus"></i> Uživatel</a></li>
                                 <li class="dropdown-item" ><a class="nav-link" style="color: white; font-weight: bold" n:href="Station:create"><i class="bi-building-add"></i> Základna</a></li>
@@ -100,7 +100,7 @@
                         <a class="nav-link" id="dashboard" n:href="Dashboard:default">Přehled</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="articles" href="#">Požadavky</a>
+                        <a class="nav-link" id="articles" n:href="Ticket:default">Požadavky</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
