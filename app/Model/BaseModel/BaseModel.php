@@ -86,5 +86,10 @@ class BaseModel{
 		$this->db->query("UPDATE `$this->table` SET ? WHERE id = ?", $args, $id);
 	}
 
+    //Get number of rows with specific value in specific column
+    public function getNumberOfRows($column, $value): int {
+        return $this->db->table($this->table)->where($column, $value)->count();
+    }
+
 
 }

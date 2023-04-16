@@ -2,12 +2,21 @@
 
 namespace App\Presenters;
 
+use App\Model\Repository\Table\VehicleRepository;
+use App\Model\DataManager\VehicleDataManager;
+use App\Model\DataSource\Form\VehicleFormDataSource;
+use App\Types\DB\Tables\TDBVehicle;
+use App\Types\Form\TFormVehicle;
+
+
 use App\Model\Repository\Table\StationRepository;
 use App\Model\DataManager\StationDataManager;
 use App\Model\DataSource\Form\StationFormDataSource;
 use App\Types\DB\Tables\TDBStation;
 use App\Types\Form\TFormStation;
+
 use Nette\Application\UI\Form;
+use Nette\Utils\ArrayHash;
 
 
 class StationPresenter extends BasePresenter
@@ -16,17 +25,47 @@ class StationPresenter extends BasePresenter
     public $stationDataManager;
     public $stationFormDataSource;
 
-    public function __construct(StationRepository $stationRepository, StationDataManager $stationDataManager, StationFormDataSource $stationFormDataSource)
+    public $vehicleRepository;
+    public $vehicleDataManager;
+    public $vehicleFormDataSource;
+
+
+    public function __construct(StationRepository $stationRepository, StationDataManager $stationDataManager, StationFormDataSource $stationFormDataSource, VehicleRepository $vehicleRepository, VehicleDataManager $vehicleDataManager, VehicleFormDataSource $vehicleFormDataSource)
     {
         $this->stationRepository = $stationRepository;
         $this->stationDataManager = $stationDataManager;
         $this->stationFormDataSource = $stationFormDataSource;
+
+        $this->vehicleRepository = $vehicleRepository;
+        $this->vehicleDataManager = $vehicleDataManager;
+        $this->vehicleFormDataSource = $vehicleFormDataSource;
+
     }
 
     public function renderDefault()
     {
         $this->setup();
-        $this->template->stations = $this->stationRepository->findAll();
+
+
+
+        $readyStations = [];
+
+        //Add data about stations into readyStations with number of vehicles data
+        foreach ($this->stationRepository->findAllActive() as $station) {
+            $newStation = new ArrayHash();
+            $newStation->id = $station->id;
+            $newStation->name = $station->name;
+            $newStation->address = $station->address;
+            $newStation->size = $station->size;
+            $newStation->vehicleCount = $this->vehicleRepository->findAllActive()->where('station', $station->id)->count();
+            $newStation->onStationVehicleCount = $this->vehicleRepository->findAllActive()->where('station', $station->id)->where('on_station', 1)->count();
+
+            //Add newStation into readyStations
+            $readyStations[$newStation->id] = $newStation;
+        }
+
+        $this->template->stations = $readyStations;
+
     }
 
     public function renderCreate()

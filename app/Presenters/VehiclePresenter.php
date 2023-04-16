@@ -76,11 +76,13 @@ class VehiclePresenter extends BasePresenter
     public function formVehicleSucceeded(Form $form, $values)
     {
         $this->setup();
-        $this->vehicleRepository->save($values);
-        $this->flashMessage('Vozidlo bylo uloženo');
+        $stationSize =  $this->stationRepository->findById($values->station)->fetch()['size'];
+        if ($stationSize > $this->vehicleRepository->findAllActive()->where('station', $values->station)->count()) {
+            $this->vehicleRepository->save($values);
+            $this->flashMessage('Vozidlo bylo uloženo', 'success');
+        } else {
+            $this->flashMessage('Základna je již plná', 'danger');
+        }
         $this->redirect('Vehicle:default');
     }
-
-
-
 }

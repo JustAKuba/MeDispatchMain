@@ -13,7 +13,7 @@ class VehicleFormDataSource
 {
     public $VehicleRepository;
 
-    public function __construct(VehicleRepository $VehicleRepository, )
+    public function __construct(VehicleRepository $VehicleRepository)
     {
         $this->VehicleRepository = $VehicleRepository;
     }

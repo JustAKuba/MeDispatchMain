@@ -2,6 +2,7 @@ parameters:
 
 
 database:
-	dsn: 'mysql:host=sw-client-sql-1.mysql.database.azure.com;dbname=medispatch'
-	user: jkohoutek225
-	password: atavism51iNfidel25bondiNg
+	dsn: 'mysql:host=small-web.cz;dbname=medispatch'
+	user: remote_medispatch
+	password: 6mv209Q!1ba0
+

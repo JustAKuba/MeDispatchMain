@@ -12,7 +12,8 @@
         }
 
         #ticket td, #ticket th {
-            border: 1px solid #ddd;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
             padding: 8px;
         }
 
@@ -50,16 +51,18 @@
         }
     </style>
     <div class="container" style="margin-top: 20px">
-
-        <h1><i class="bi-envelope"></i> Požadavky</h1>
-        <table id="ticket">
+        <div style="margin-bottom: 15px">
+            <h1><i class="bi-envelope"></i> Požadavky</h1>
+        </div>
+        <table id="ticket" >
             {foreach $tickets as $ticket}
 
                 <tr>
-                    <td><a n:href="Ticket:edit $ticket->id">{$ticket->id}-{$ticket->summary}</a> | <span class="badge bg-{if $ticket->urgency == 0}danger{elseif $ticket->urgency == 1}warning{elseif $ticket->urgency == 2}primary{elseif $ticket->urgency == 3}secondary{/if}">{if $ticket->urgency==0}Velmi závažné{elseif $ticket->urgency==1}Závažné{elseif $ticket->urgency==2}Normální{elseif $ticket->urgency==3}Nízká priorita{/if}</span></td>
-
+                    <td>{$ticket->created_at}</td>
+                    <td><a n:href="Ticket:edit $ticket->id">{$ticket->id}-{$ticket->summary}</a></td>
+                    <td> <span class="badge bg-{if $ticket->urgency == 0}danger{elseif $ticket->urgency == 1}warning{elseif $ticket->urgency == 2}primary{elseif $ticket->urgency == 3}secondary{/if}">{if $ticket->urgency==0}Velmi závažné{elseif $ticket->urgency==1}Závažné{elseif $ticket->urgency==2}Normální{elseif $ticket->urgency==3}Nízká priorita{/if}</span></td>
                     <td>{$ticket->location_address}</td>
-                    <td>{$vehicles[$ticket->vehicle]}</td>
+                    <td><a n:href="Vehicle:edit $ticket->vehicle">{$vehicles[$ticket->vehicle]}</td>
                     <td> {if $ticket->state == 0}Na cestě{elseif $ticket->state == 1}Na místě{elseif $ticket->state == 2}Cesta do N{elseif $ticket->state == 3}Vyřešené{elseif $ticket->state == 4}Zrušeno{elseif $ticket->state == 5}Nové{/if}</td>
                 </tr>
 

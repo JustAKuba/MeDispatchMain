@@ -46,7 +46,9 @@ class UserFormDataSource
         $user->name = $values->name;
         $user->email = $values->email;
         $user->role = $values->role;
-        $user->password =password_hash($values->password, PASSWORD_DEFAULT);
+        if($values->password != null) {
+            $user->password =password_hash($values->password, PASSWORD_DEFAULT);
+        }
         return $this->userRepository->save($user);
     }
 

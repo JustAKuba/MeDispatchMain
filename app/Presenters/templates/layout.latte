@@ -17,7 +17,6 @@
 
     <style>
         footer {
-            position: fixed;
             left: 0;
             bottom: 0;
             width: 100%;
@@ -42,6 +41,10 @@
         .flash{
             width: 100%;
             color: white;
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 10px;
+
         }
 
         .success {
@@ -88,7 +91,7 @@
                             <button class="addButton"><i class="bi-node-plus-fill" ></i></button>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #ae0909; color: white; font-weight: bold">
-                            <li class="dropdown-item" style="color: white; font-weight: bold"><a class="nav-link" n:href="Ticket:create"><i class="bi-envelope-plus"></i> Požadavek</a></li>
+                            <li class="dropdown-item" style="color: white; font-weight: bold"><a class="nav-link" style="color: white; font-weight: bold" n:href="Ticket:create"><i class="bi-envelope-plus"></i> Požadavek</a></li>
                             {if $userRole == 'Admin'}
                                 <li class="dropdown-item" ><a class="nav-link" style="color: white; font-weight: bold" n:href="Users:create"><i class="bi-person-plus"></i> Uživatel</a></li>
                                 <li class="dropdown-item" ><a class="nav-link" style="color: white; font-weight: bold" n:href="Station:create"><i class="bi-building-add"></i> Základna</a></li>
@@ -134,7 +137,7 @@
                             {$user->name} ({$user->id})
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Profil</a></li>
+                            <li><a class="dropdown-item" n:href="Profile:Default">Profil</a></li>
                             <li><a class="dropdown-item" href="#">Nastavení</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" n:href=":Sign:out">Odhlásit se</a></li>

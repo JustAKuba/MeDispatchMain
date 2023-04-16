@@ -52,7 +52,7 @@ class TicketPresenter extends BasePresenter
     public function renderDefault(): void
     {
         $this->setup();
-
+        //TODO: sort by date, add pagination
         $this->template->tickets = $this->TicketRepository->findAllActive();
         $this->template->vehicles = $this->VehicleRepository->findAll()->fetchPairs('id', 'callsign');
         $this->template->stations = $this->StationRepository->findAll();
@@ -61,12 +61,25 @@ class TicketPresenter extends BasePresenter
     public function renderCreate(): void
     {
         $this->setup();
+        //$this['formTicket']->addSelect('vehicle', 'Vozidlo', $this->VehicleRepository->findAll()->where('on_station = 1')->fetchPairs('id', 'callsign'))
+        //    ->setRequired('Vyberte prosím vozidlo');
     }
 
     public function renderEdit($id): void
     {
         $this->setup();
+
+
         $this['formTicket']->setDefaults($this->TicketFormDataSource->getDefaultsEditTicket($id));
+
+    }
+
+    public function renderView($id): void
+    {
+        $this->setup();
+        $this->template->ticket = $this->TicketRepository->find($id);
+        $this->template->vehicle = $this->VehicleRepository->find($this->template->ticket->vehicle);
+        $this->template->station = $this->StationRepository->find($this->template->vehicle->station);
     }
 
     public function actionDelete($id): void
@@ -81,13 +94,14 @@ class TicketPresenter extends BasePresenter
 
     public function createComponentFormTicket(): Form
     {
+        $vehid = "";
         $form = new Form;
         $form->addHidden('id');
         $form->addText('location_address', 'Adresa');
         $form->addText('location_gps', 'GPS');
         $form->addSelect('urgency', 'Naléhavost', [0=>'Velmi závažné', 1=>'Závažné', 2=>'Normální', 3=>'Nízká priorita'])
-            ->setRequired('Nastavte prosím naléhavost');
-        $form->addSelect('vehicle', 'Vozidlo', $this->VehicleRepository->findAll()->fetchPairs('id', 'callsign'))
+          ->setRequired('Nastavte prosím naléhavost');
+        $form->addSelect('vehicle', 'Vozidlo', $this->VehicleRepository->findAllActive()->fetchPairs('id','callsign'))
             ->setRequired('Vyberte prosím vozidlo');
         $form->addText('summary', 'Stručný popis')
             ->setRequired('Prosím vyplňte stručný popis');
@@ -96,9 +110,10 @@ class TicketPresenter extends BasePresenter
         $form->addSelect('state', 'Stav', [0=>'Na cestě',1=>'Na místě',2=>'Cesta do N', 3=>'Vyřešeno', 4=>'Zrušeno', 5=>'Nový'])
             ->setDefaultValue(5)
             ->setRequired('Nastavte prosím stav');
-        $form->addSubmit('submit', 'Vytvořit')
+        $form->addSubmit('submit', 'Uložit')
             ->setHtmlAttribute('class', 'btn btn-primary');
         $form->onSuccess[] = [$this, 'formTicketSucceeded'];
+
         return $form;
     }
 
