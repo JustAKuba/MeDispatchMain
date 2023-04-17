@@ -11,66 +11,38 @@
 {block content}
 {if $userRole == 'Admin'}
     <h2>
-        Informace o aplikaci:
+        Vítejte v systému
     </h2>
-    <ul>
-        <li>
-            Verze: DEMO 0.1
-        </li>
-        <li>
-            Jméno společnosti: DEMO
-        </li>
-    </ul>
-    <h2>
-        Zkratky administrátora:
-    </h2>
-    <ul>
-        <li>
-            Todo
-        </li>
-        <li>
-            Todo
-        </li>
-        <li>
-            Todo
-        </li>
-        <li>
-            Todo
-        </li>
-    </ul>
+    <p>
+        Jste přihlášen jako administrátor.
+    </p>
+    <p>
+        Tento systém slouží k evidenci požadavků na zásahy záchranných služeb.
+    </p>
 {/if}
 {if $userRole == 'Dispatch'}
-    <div class="container-fluid">
-        <!-- Add three boxes of same size with statistics -->
-        <div class="row">
-            <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-aqua">
-                    <div class="inner">
-                        <h3>Požadavků dnes</h3>
-                    </div>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                    <div class="inner">
-                      <h3>Nevyřešených požadavků</h3>
-                    </div>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-yellow">
-                    <div class="inner">
-                        <h3>Velmi vážných požadavků</h3>
-                    </div>
-                    <div class="icon">
-                </div>
-            </div><!-- ./col -->
-        </div><!-- /.row -->
-    </div>
+    <h2>
+        Vítejte v systému
+    </h2>
+    <p>
+        Jste přihlášen jako dispečer.
+    </p>
+    <p>
+        Tento systém slouží k evidenci požadavků na zásahy záchranných služeb.
+    </p>
 {/if}
 {if $userRole == 'Rescue'}
+    <h2>
+        Vítejte v systému
+    </h2>
+    <p>
+        Jste přihlášen jako záchranář.
+    </p>
+    <p>
+        Účet záchranáře je určený pouze k úpravě profilu, přístup k evidenci požadavků je přístupný přes API.
+    </p>
+    <p>
+        Tento systém slouží k evidenci požadavků na zásahy záchranných služeb.
+    </p>
 {/if}
 {/block}
